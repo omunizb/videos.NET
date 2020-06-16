@@ -23,7 +23,7 @@ namespace Ex4_FASE3
                     Console.WriteLine("Which tag would you like to add?");
                     break;
                 case VideoActions.Play:
-                    Console.WriteLine("Started playing video");
+                    Console.WriteLine("The video is playing!");
                     break;
                 case VideoActions.Pause:
                     Console.WriteLine("Video paused");

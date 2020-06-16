@@ -57,7 +57,17 @@ namespace Ex4_FASE3
         {
             if (!loggedUser.VideoList.Any())
             {
+                string url, title;
+                List<string> videoTags = new List<string>();
                 Console.WriteLine("You don't have any videos yet. Let's add some!");
+                videoTags.Add(AskUser("Add one tag. You can add more later"));
+                url = AskUser("URL");
+                title = AskUser("Title");
+
+                Video newVideo = new Video(url, title, videoTags);
+
+                Console.WriteLine($"\"{newVideo.Title}\" has been uploaded successfully");
+                
                 return;
             }
 
@@ -73,9 +83,9 @@ namespace Ex4_FASE3
                 return;
             }
 
-            Video chosen = loggedUser.VideoList[chosenOption];
+            Video chosenVideo = loggedUser.VideoList[chosenOption];
 
-            Console.WriteLine($"You have selected \"{chosen.Title}\". Now write the index of the action you would like to perform:");
+            Console.WriteLine($"You have selected \"{chosenVideo.Title}\". Now write the index of the action you would like to perform:");
             Console.WriteLine("1. Add tags");
             Console.WriteLine("2. Play video");
 
@@ -85,10 +95,13 @@ namespace Ex4_FASE3
             {
                 return;
             }
-
-            if (chosenOption == 2)
+            if (chosenOption == 1)
             {
-                Console.WriteLine("The video is playing!");
+                chosenVideo.PerformActions(VideoActions.AddTag);
+            }
+            else
+            {
+                chosenVideo.PerformActions(VideoActions.Play);
                 Console.WriteLine("1. Pause video");
                 Console.WriteLine("2. Stop video");
                 chosenOption = CheckMainMenu(2);
@@ -96,6 +109,14 @@ namespace Ex4_FASE3
                 if (!Convert.ToBoolean(chosenOption))
                 {
                     return;
+                }
+                if (chosenOption == 1)
+                {
+                    chosenVideo.PerformActions(VideoActions.Pause);
+                }
+                else
+                {
+                    chosenVideo.PerformActions(VideoActions.Stop);
                 }
             }
             return;
