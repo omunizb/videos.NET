@@ -97,13 +97,15 @@ namespace Ex4_FASE3
             }
             if (chosenOption == 1)
             {
-                chosenVideo.PerformActions(VideoActions.AddTag);
+                chosenVideo.SetStatus(VideoStatus.AddTag);
+                chosenVideo.Tags.Add(AskUser("Add a new tag"));
             }
             else
             {
-                chosenVideo.PerformActions(VideoActions.Play);
+                chosenVideo.SetStatus(VideoStatus.Play);
                 Console.WriteLine("1. Pause video");
                 Console.WriteLine("2. Stop video");
+
                 chosenOption = CheckMainMenu(2);
 
                 if (!Convert.ToBoolean(chosenOption))
@@ -112,11 +114,11 @@ namespace Ex4_FASE3
                 }
                 if (chosenOption == 1)
                 {
-                    chosenVideo.PerformActions(VideoActions.Pause);
+                    chosenVideo.SetStatus(VideoStatus.Pause);
                 }
                 else
                 {
-                    chosenVideo.PerformActions(VideoActions.Stop);
+                    chosenVideo.SetStatus(VideoStatus.Stop);
                 }
             }
             return;

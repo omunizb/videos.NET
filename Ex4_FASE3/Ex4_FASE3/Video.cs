@@ -11,25 +11,30 @@ namespace Ex4_FASE3
             this.URL = url;
             this.Title = title;
             this.Tags = tags;
+            Status = VideoStatus.Stop;
         }
         public string URL { get; set; }
         public string Title { get; set; }
         public List<string> Tags { get; set; }
-        public void PerformActions(VideoActions action)
+        public VideoStatus Status { get; set; }
+        public void SetStatus(VideoStatus action)
         {
             switch (action)
             {
-                case VideoActions.AddTag:
+                case VideoStatus.AddTag:
                     Console.WriteLine("Which tag would you like to add?");
                     break;
-                case VideoActions.Play:
+                case VideoStatus.Play:
                     Console.WriteLine("The video is playing!");
+                    this.Status = VideoStatus.Play;
                     break;
-                case VideoActions.Pause:
+                case VideoStatus.Pause:
                     Console.WriteLine("Video paused");
+                    this.Status = VideoStatus.Pause;
                     break;
-                case VideoActions.Stop:
+                case VideoStatus.Stop:
                     Console.WriteLine("Stopped video reproduction");
+                    this.Status = VideoStatus.Stop;
                     break;
                 default:
                     Console.WriteLine("Invalid command");
